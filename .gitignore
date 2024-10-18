@@ -1,0 +1,38 @@
+# Питоновские байт-коды
+__pycache__/
+*.py[cod]
+
+# Директории виртуальных окружений
+venv/
+env/
+ENV/
+.venv/
+.env/
+
+# Файлы конфигурации среды
+*.env
+
+config.py
+
+# Директории с зависимостями
+*.egg-info/
+dist/
+build/
+
+# Кеши
+*.pyc
+*.pyo
+*.pyd
+
+# Логи
+*.log
+
+# Системные файлы
+.DS_Store
+Thumbs.db
+
+# IDE и редакторы
+.vscode/
+.idea/
+*.swp
+*.swo

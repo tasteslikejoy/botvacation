@@ -35,7 +35,7 @@ async def pagination(call: CallbackQuery, callback_data: fabrics.Pag):
             f'{bags[page][0]} {bags[page][1]}',
             reply_markup=fabrics.pag_bags(page)
         )
-    # await call.answer() отправляет ответ на callback-запрос
+    # Отправляет ответ на callback-запрос
     await call.answer()
 
 @router.callback_query(fabrics.Pag.filter(F.action.in_(['prev_cloth', 'next_cloth'])))

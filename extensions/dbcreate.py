@@ -43,6 +43,7 @@ class Task(Base):
     timer = Column(DateTime, nullable=True)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
     user = relationship('User', back_populates='tasks')
+    chat_id = Column(Integer)
 
 
 # Создаем асинхронную сессию
@@ -157,11 +158,12 @@ async def create_task(user_chat_id: int, inner_text: str, timer_str: datetime = 
         if user:
             timer = timer_str
 
-            # Создаем новую задачу
+            # Создаем новую задачу с chat_id
             new_task = Task(
                 inner_text=inner_text,
                 timer=timer,
-                user_id=user.id
+                user_id=user.id,
+                chat_id=user_chat_id  # Сохраняем chat_id пользователя в задаче
             )
             session.add(new_task)
             await session.commit()

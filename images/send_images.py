@@ -4,10 +4,6 @@ from aiogram import Bot
 from aiogram import Router
 
 
-# Используется для организации маршрутов в боте.
-router = Router()
-
-
 # Папка с изображениями
 IMAGE_FOLDER = os.path.abspath('images/images_to_send/image.txt')
 # Путь к текстовому файлу

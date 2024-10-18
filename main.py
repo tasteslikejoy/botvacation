@@ -5,7 +5,6 @@ from config import config
 from handlers import bot_msg, user_msg, dairy, timer
 from callback import pagination
 from scheduler.scheduler_task import check_tasks, weekly_reminder
-from images import send_images
 
 
 # Создаем глобальный планировщик
@@ -18,7 +17,6 @@ async def main():
     dp = Dispatcher()
 
     dp.include_routers(
-        send_images.router,
         timer.router,
         dairy.router,
         user_msg.router,
@@ -30,9 +28,9 @@ async def main():
     scheduler.start()
 
     # Запускаем задачу проверки таймеров для пользователя каждую минуту
-    scheduler.add_job(check_tasks, trigger='interval', seconds=60, id='check_tasks')
+    scheduler.add_job(check_tasks, trigger='interval', seconds=60, id='check_tasks', args=[bot])
     # Запуск еженедельного напоминания
-    scheduler.add_job(weekly_reminder, trigger='interval', weeks=1, id='weekly_reminder', args=(bot,))
+    scheduler.add_job(weekly_reminder, trigger='interval', seconds=5, id='weekly_reminder', args=[bot])
 
     await bot.delete_webhook(drop_pending_updates=True)
 

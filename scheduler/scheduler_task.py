@@ -1,11 +1,15 @@
-from aiogram import Router
+from aiogram import Bot
 from sqlalchemy.future import select
 from datetime import datetime
 from images import send_images
 from extensions import dbcreate
 
 
-async def check_tasks():
+async def send_message(chat_id, text, bot: Bot):
+    await bot.send_message(chat_id, text)
+
+
+async def check_tasks(bot: Bot):  # Добавлен параметр bot
     async with dbcreate.async_session() as session:
         result = await session.execute(
             select(dbcreate.Task).where(dbcreate.Task.timer <= datetime.now())
@@ -16,6 +20,17 @@ async def check_tasks():
             for task in tasks:
                 try:
                     print(f'Напоминание о задаче: {task.inner_text}')
+
+                    # Получаем chat_id пользователя
+                    user = await session.execute(
+                        select(dbcreate.User).where(dbcreate.User.id == task.user_id)
+                    )
+                    user = user.scalar_one_or_none()
+
+                    if user:
+                        await send_message(user.chat_id, f'Напоминание о задаче: {task.inner_text}', bot)
+                    else:
+                        print(f'Пользователь с id {task.user_id} не найден')
 
                     # Удаляем задачу из базы данных
                     await session.delete(task)
@@ -39,11 +54,9 @@ async def weekly_reminder(bot):
             print(f'Еженедельное напоминание для {user.id}')
 
 
-async def activate_user_scheduler(scheduler, chat_id):
+async def activate_user_scheduler(scheduler, bot: Bot):  # Передаем bot
     async with dbcreate.async_session() as session:
-        result = await session.execute(
-            select(dbcreate.Task).where(dbcreate.Task.user_id == chat_id)
-        )
+        result = await session.execute(select(dbcreate.Task))
         tasks = result.scalars().all()
 
         for task in tasks:
@@ -53,8 +66,8 @@ async def activate_user_scheduler(scheduler, chat_id):
                     check_tasks,
                     trigger='interval',
                     seconds=60,
-                    id=f'task_reminder_{task.id}',
-                    args=(chat_id, task.inner_text)
+                    args=[bot],  # Передаем bot как аргумент
+                    id=f'task_reminder_{task.id}'  # Уникальный ID для задачи
                 )
             else:
                 print(f'Задача с таймером {task.timer} не будет добавлена, так как она уже прошла.')

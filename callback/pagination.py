@@ -5,7 +5,7 @@ from aiogram.exceptions import TelegramBadRequest
 from keyboards import fabrics
 from data.subloader import get_json
 
-
+# Используется для организации маршрутов в боте.
 router = Router()
 
 

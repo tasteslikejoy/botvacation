@@ -4,6 +4,7 @@ from aiogram import Bot
 from aiogram import Router
 
 
+# Используется для организации маршрутов в боте.
 router = Router()
 
 

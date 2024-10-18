@@ -42,7 +42,7 @@ class Task(Base):
     inner_text = Column(Text, nullable=False)
     timer = Column(DateTime, nullable=True)
     user_id = Column(Integer, ForeignKey('users.id'), nullable=False)
-    user = relationship('"User', back_populates='tasks')
+    user = relationship('User', back_populates='tasks')
 
 
 # Создаем асинхронную сессию

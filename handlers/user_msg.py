@@ -4,6 +4,8 @@ from aiogram.filters import CommandStart
 from keyboards import reply
 from extensions import dbcreate
 
+
+# Используется для организации маршрутов в боте.
 router = Router()
 
 

@@ -1,9 +1,8 @@
-import asyncio
 from aiogram import Router
 from sqlalchemy.future import select
 from datetime import datetime
-from extensions import dbcreate
 from images import send_images
+from extensions import dbcreate
 
 
 async def check_tasks():
@@ -41,7 +40,6 @@ async def weekly_reminder(bot):
 
 
 async def activate_user_scheduler(scheduler, chat_id):
-    # Получаем задачи пользователя
     async with dbcreate.async_session() as session:
         result = await session.execute(
             select(dbcreate.Task).where(dbcreate.Task.user_id == chat_id)

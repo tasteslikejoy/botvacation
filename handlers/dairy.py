@@ -45,7 +45,7 @@ async def form_text(message: Message, state: FSMContext):
             caption=caption,
             body=body
         )
-        await message.answer(f'Заметка создана: {note_id}')
+        await message.answer(f'Заметка создана: {note_id}', reply_markup=reply.list_dairy_kb)
     except Exception as e:
         await message.answer(f'Ошибка: {str(e)}')
     # Процесс завершается очисткой состояния с помощью await state.clear()
@@ -112,14 +112,14 @@ async def handle_delete_note(message: Message, state: FSMContext):
                 result = await dbcreate.delete_note(user_chat_id=user_chat_id, note_id=note_id)
 
                 if result:
-                    await message.answer(f'Заметка "{note_id}" была удалена.', reply_markup=reply.call_dairy_kb)
+                    await message.answer(f'Заметка "{note_id}" была удалена.', reply_markup=reply.list_dairy_kb)
                 else:
                     await message.answer(f'Заметка "{note_id}" не найдена. Пожалуйста, проверьте ID.')
             except Exception as e:
                 await message.answer(f'Ошибка при удалении заметки: {str(e)}')
 
         # Завершаем текущее состояние, чтобы сбросить контекст.
-        await state.finish()
+        await state.clear()
 
 
 # Этот декоратор устанавливает обработчик для сообщений, содержащих текст 'редактировать заметку'
@@ -188,7 +188,7 @@ async def handle_edit_note(message: Message, state: FSMContext):
                 )
 
                 if result:
-                    await message.answer(f'Заметка "{note_id}" была отредактирована.')
+                    await message.answer(f'Заметка "{note_id}" была отредактирована.', reply_markup=reply.list_dairy_kb)
                 else:
                     await message.answer(f'Заметка "{note_id}" не найдена. Пожалуйста, проверьте ID.')
             except Exception as e:

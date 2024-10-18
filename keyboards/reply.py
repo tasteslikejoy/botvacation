@@ -64,7 +64,7 @@ vacation_kb = ReplyKeyboardMarkup(
             KeyboardButton(text='Предупредить начальство')
         ],
         [
-            KeyboardButton(text='Начать отсчет')
+            KeyboardButton(text='Создать напоминание')
         ],
         [
             KeyboardButton(text='Собрать вещи')

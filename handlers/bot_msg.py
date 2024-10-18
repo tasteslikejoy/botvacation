@@ -23,18 +23,18 @@ async def msg(message: Message):
     # Проверяем, совпадает ли текст сообщения с ключевым словом "отпуск"
     if msg == 'отпуск':
         # Если условие выполняется, бот отправляет пользователю сообщение с текстом и прикрепляет к нему клавиатуру
-        await message.answer('Отлично! Давайте скорее соберем вещи!', reply_markup=reply.vacation_kb)
+        await message.answer('Давайте скорее соберем вещи! Нам нужны коктейли! 🍹🍸🍷', reply_markup=reply.vacation_kb)
     elif msg == 'ежедневник':
-        await message.answer('Ничего не забудьте!', reply_markup=reply.dairy_kb)
+        await message.answer('Ничего не забудьте! 📙', reply_markup=reply.dairy_kb)
     elif msg == 'назад':
         await message.answer('Главное меню', reply_markup=reply.main_kb)
     elif msg == 'предупредить начальство':
-        await message.answer('Давай создадим задачу и я о ней напомню!', reply_markup=reply.call_timer_kb)
-    elif msg == 'начать отсчет':
-        await message.answer(f'Как здорово, {message.from_user.username}! '
-                             f'Когда планируем отдыхать?', reply_markup=reply.call_vacation_kb)
+        await message.answer('Давай создадим задачу и я о ней напомню! 📅', reply_markup=reply.call_timer_kb)
+    elif msg == 'создать напоминание':
+        await message.answer(f'Отлично, {message.from_user.username}! '
+                             f'Когда планируем отдыхать? Давай создадим напоминание, что бы ничего не забыть! 📆', reply_markup=reply.call_vacation_kb)
     elif msg == 'собрать вещи':
-        await message.answer('Отлично! Давай приступим!', reply_markup=reply.bags_kb)
+        await message.answer('Давай приступим! 💼', reply_markup=reply.bags_kb)
     elif msg == 'документы':
         await message.answer(f'{bags[0][0]} {bags[0][1]}', reply_markup=fabrics.pag_bags(0))
         if bags:

@@ -16,7 +16,7 @@ router = Router()
 async def process_message(message: Message, state: FSMContext):
     # Состояние FSM устанавливается в Formtime.note, что указывает на ожидание ввода напоминания
     await state.set_state(Formtime.note)
-    await message.answer('Напоминание:', reply_markup=reply.call_kb)
+    await message.answer('Введите текст напоминания:', reply_markup=reply.call_kb)
 
 
 # Этот обработчик активируется, когда пользователь вводит текст

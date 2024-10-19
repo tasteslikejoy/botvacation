@@ -30,7 +30,7 @@ async def main():
     # Запускаем задачу проверки таймеров для пользователя каждую минуту
     scheduler.add_job(check_tasks, trigger='interval', seconds=60, id='check_tasks', args=[bot])
     # Запуск еженедельного напоминания
-    scheduler.add_job(weekly_reminder, trigger='interval', seconds=300, id='weekly_reminder', args=[bot])
+    scheduler.add_job(weekly_reminder, trigger='interval', seconds=600, id='weekly_reminder', args=[bot])
 
     await bot.delete_webhook(drop_pending_updates=True)
 

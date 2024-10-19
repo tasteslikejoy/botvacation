@@ -9,6 +9,7 @@ IMAGE_FOLDER = os.path.abspath('images/images_to_send/image.txt')
 # Путь к текстовому файлу
 TEXT_FILE = os.path.abspath('images/text/text.txt')
 
+
 # Читает файл с изображениями, заполняет список ссылками и возвращает случайную ссылку
 def get_random_image():
     try:
@@ -39,7 +40,6 @@ def get_random_text():
 async def send_random_image_and_text(bot: Bot, user: int):
     image_path = get_random_image()
     random_text = get_random_text()
-
 
     if image_path is None:
         return 'Извините, не удалось найти изображение.'

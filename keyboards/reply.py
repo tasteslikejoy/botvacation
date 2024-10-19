@@ -16,7 +16,7 @@ main_kb = ReplyKeyboardMarkup(
         ]
     ],
     resize_keyboard=True, # изменяет размер кнопок на маленькие
-    input_field_placeholder='Я в своем познании настолько преисполнился...', # Текст отображается в поле ввода текста
+    input_field_placeholder='Я в своем познании настолько преисполнился...' # Текст отображается в поле ввода текста
 )
 
 dairy_kb = ReplyKeyboardMarkup(
@@ -31,7 +31,8 @@ dairy_kb = ReplyKeyboardMarkup(
             KeyboardButton(text='Назад')
         ]
     ],
-    resize_keyboard=True
+    resize_keyboard=True,
+    input_field_placeholder='Я в своем познании настолько преисполнился...'
 )
 
 list_dairy_kb = ReplyKeyboardMarkup(
@@ -46,7 +47,8 @@ list_dairy_kb = ReplyKeyboardMarkup(
             KeyboardButton(text='Ежедневник')
         ]
     ],
-    resize_keyboard=True
+    resize_keyboard=True,
+    input_field_placeholder='Я в своем познании настолько преисполнился...'
 )
 
 call_dairy_kb = ReplyKeyboardMarkup(
@@ -55,7 +57,8 @@ call_dairy_kb = ReplyKeyboardMarkup(
             KeyboardButton(text='Ежедневник')
         ]
     ],
-    resize_keyboard=True
+    resize_keyboard=True,
+    input_field_placeholder='Я в своем познании настолько преисполнился...'
 )
 
 vacation_kb = ReplyKeyboardMarkup(
@@ -73,7 +76,8 @@ vacation_kb = ReplyKeyboardMarkup(
             KeyboardButton(text='Назад')
         ]
     ],
-    resize_keyboard=True
+    resize_keyboard=True,
+    input_field_placeholder='Я в своем познании настолько преисполнился...'
 )
 
 call_kb = ReplyKeyboardMarkup(
@@ -82,7 +86,8 @@ call_kb = ReplyKeyboardMarkup(
             KeyboardButton(text='Отпуск')
         ]
     ],
-    resize_keyboard=True
+    resize_keyboard=True,
+    input_field_placeholder='Я в своем познании настолько преисполнился...'
 )
 
 call_timer_kb = ReplyKeyboardMarkup(
@@ -94,7 +99,8 @@ call_timer_kb = ReplyKeyboardMarkup(
             KeyboardButton(text='Отпуск')
         ]
     ],
-    resize_keyboard=True
+    resize_keyboard=True,
+    input_field_placeholder='Я в своем познании настолько преисполнился...'
 )
 
 call_vacation_kb = ReplyKeyboardMarkup(
@@ -106,7 +112,8 @@ call_vacation_kb = ReplyKeyboardMarkup(
             KeyboardButton(text='Отпуск')
         ]
     ],
-    resize_keyboard=True
+    resize_keyboard=True,
+    input_field_placeholder='Я в своем познании настолько преисполнился...'
 )
 
 bags_kb = ReplyKeyboardMarkup(
@@ -124,5 +131,6 @@ bags_kb = ReplyKeyboardMarkup(
             KeyboardButton(text='Отпуск')
         ],
     ],
-    resize_keyboard=True
+    resize_keyboard=True,
+    input_field_placeholder='Я в своем познании настолько преисполнился...'
 )

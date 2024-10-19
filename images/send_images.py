@@ -27,10 +27,10 @@ def get_random_text():
         with open(TEXT_FILE, 'r', encoding='utf-8') as file:
             lines = file.readlines()
         if not lines:
-            raise ValueError("Текстовый файл пуст.")
+            raise ValueError('Текстовый файл пуст.')
         return random.choice(lines).strip()
     except Exception as e:
-        print(f"Ошибка при получении случайного текста: {e}")
+        print(f'Ошибка при получении случайного текста: {e}')
         return None
 
 # Эта функция принимает объект бота bot и идентификатор пользователя user

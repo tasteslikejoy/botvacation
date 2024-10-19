@@ -5,12 +5,15 @@ from images import send_images
 from extensions import dbcreate
 
 
+# Функ ция отвечает за отправку сообщений
 async def send_message(chat_id, text, bot: Bot):
     await bot.send_message(chat_id, text)
 
 
-async def check_tasks(bot: Bot):  # Добавлен параметр bot
+async def check_tasks(bot: Bot):
+    # Асинхронный контекстный менеджер для создания сессии с базой данных
     async with dbcreate.async_session() as session:
+        # Выбирает задачи из базы данных, у которых время меньше или равно текущему времени
         result = await session.execute(
             select(dbcreate.Task).where(dbcreate.Task.timer <= datetime.now())
         )
@@ -21,7 +24,8 @@ async def check_tasks(bot: Bot):  # Добавлен параметр bot
                 try:
                     print(f'Напоминание о задаче: {task.inner_text}')
 
-                    # Получаем chat_id пользователя
+                    # Здесь выполняется запрос для нахождения пользователя по ID, связанному с задачей
+                    # Если пользователь найден, он сохраняется в переменной user
                     user = await session.execute(
                         select(dbcreate.User).where(dbcreate.User.id == task.user_id)
                     )
@@ -54,8 +58,11 @@ async def weekly_reminder(bot):
             print(f'Еженедельное напоминание для {user.id}')
 
 
-async def activate_user_scheduler(scheduler, bot: Bot):  # Передаем bot
+async def activate_user_scheduler(scheduler, bot: Bot):
+     # Используя контекстный менеджер, мы создаем асинхронную сессию для работы с базой данных через dbcreate
     async with dbcreate.async_session() as session:
+        # Здесь мы выполняем SQL запрос для получения всех объектов Task из базы данных
+        # scalars() используется для извлечения значений, а all() собирает их в список
         result = await session.execute(select(dbcreate.Task))
         tasks = result.scalars().all()
 
@@ -66,7 +73,7 @@ async def activate_user_scheduler(scheduler, bot: Bot):  # Передаем bot
                     check_tasks,
                     trigger='interval',
                     seconds=60,
-                    args=[bot],  # Передаем bot как аргумент
+                    args=[bot],
                     id=f'task_reminder_{task.id}'  # Уникальный ID для задачи
                 )
             else:

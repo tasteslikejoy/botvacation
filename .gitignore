@@ -37,5 +37,6 @@ Thumbs.db
 *.swo
 
 # Доработка
-weather/
+**/weather/
+
 

@@ -170,3 +170,54 @@ async def create_task(user_chat_id: int, inner_text: str, timer_str: datetime = 
             return new_task.inner_text  # Возвращаем текст новой задачи
         else:
             raise Exception(f'Пользователь с chat_id {user_chat_id} не найден.')
+        
+
+# Удаляем задачу
+async def delete_task(user_chat_id: int, task_id: int):
+    async with async_session() as session:
+        # Получаем заметку
+        result = await session.execute(
+            select(Task).where(
+                Task.id == task_id,
+                Task.user_id == select(User.id).where(User.chat_id == user_chat_id)
+            )
+        )
+        task = result.scalar_one_or_none()
+        
+        if task:  # Убедимся, что ззадача найдена
+            await session.delete(task)
+            await session.commit()
+            return True
+        else:
+            raise Exception(f'Напоминание с ID {task_id} не найдено для пользователя с chat_id {user_chat_id}.')
+        
+
+# Редактируем  напоминание и сохраняем в базу
+async def edit_task (user_chat_id: int, task_id: int, new_inner_text: str, new_timer_str: datetime = None):
+    async with async_session() as session:
+        result = await session.execute(
+            select(Task).where(
+                Task.id == task_id,
+                Task.user_id == select(User.id).where(User.chat_id == user_chat_id)
+            )
+        )
+        task = result.scalar_one_or_none()
+
+        if task:  # Убедимся, что заметка найдена
+            task.inner_text = new_inner_text
+            task.timer = new_timer_str
+            
+            await session.commit()
+            return True
+        else:
+            raise Exception(f'Напоминание с ID {task_id} не найдено для пользователя с chat_id {user_chat_id}.')
+        
+# Получение всех напоминаний пользователя
+async def get_user_task(user_chat_id: int):
+    async with async_session() as session:
+        # Получаем напоминания пользователя
+        result = await session.execute(
+            select(Task).where(Task.user_id == select(User.id).where(User.chat_id == user_chat_id))
+        )
+        tasks = result.scalars().all()  # Возвращаем список объектов Note
+        return tasks

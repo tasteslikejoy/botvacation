@@ -46,7 +46,7 @@ async def form_text(message: Message, state: FSMContext):
             caption=caption,
             body=body
         )
-        await message.answer(f'Заметка создана: {note_id}', reply_markup=reply.list_dairy_kb)
+        await message.answer(f'Заметка создана: {note_id}', reply_markup=reply.dairy_kb)
     except Exception as e:
         await message.answer(f'Ошибка: {str(e)}')
     # Процесс завершается очисткой состояния с помощью await state.clear()

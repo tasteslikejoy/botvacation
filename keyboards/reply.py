@@ -67,7 +67,7 @@ vacation_kb = ReplyKeyboardMarkup(
             KeyboardButton(text='Предупредить начальство')
         ],
         [
-            KeyboardButton(text='Создать напоминание')
+            KeyboardButton(text='Напоминания')
         ],
         [
             KeyboardButton(text='Собрать вещи')
@@ -75,6 +75,38 @@ vacation_kb = ReplyKeyboardMarkup(
         [
             KeyboardButton(text='Назад')
         ]
+    ],
+    resize_keyboard=True,
+    input_field_placeholder='Я в своем познании настолько преисполнился...'
+)
+
+tasks_kb = ReplyKeyboardMarkup(
+    keyboard=[
+        [
+            KeyboardButton(text='Список напоминаний'),
+        ],
+        [
+            KeyboardButton(text='Новое напоминание'),
+        ],
+        [
+            KeyboardButton(text='Отпуск')
+        ],
+    ],
+    resize_keyboard=True,
+    input_field_placeholder='Я в своем познании настолько преисполнился...'
+)
+
+list_tasks_kb = ReplyKeyboardMarkup(
+    keyboard=[
+        [
+            KeyboardButton(text='Удалить напоминание'),
+        ],
+        [
+            KeyboardButton(text='Редактировать напоминание'),
+        ],
+        [
+            KeyboardButton(text='Напоминания')
+        ],
     ],
     resize_keyboard=True,
     input_field_placeholder='Я в своем познании настолько преисполнился...'
@@ -94,19 +126,6 @@ call_timer_kb = ReplyKeyboardMarkup(
     keyboard=[
         [
             KeyboardButton(text='Создать задачу')
-        ],
-        [
-            KeyboardButton(text='Отпуск')
-        ]
-    ],
-    resize_keyboard=True,
-    input_field_placeholder='Я в своем познании настолько преисполнился...'
-)
-
-call_vacation_kb = ReplyKeyboardMarkup(
-    keyboard=[
-        [
-            KeyboardButton(text='Запланировать отдых')
         ],
         [
             KeyboardButton(text='Отпуск')

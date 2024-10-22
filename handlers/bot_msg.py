@@ -31,9 +31,9 @@ async def msg(message: Message):
         await message.answer('Главное меню', reply_markup=reply.main_kb)
     elif msg == 'предупредить начальство':
         await message.answer('Давай создадим задачу и я о ней напомню! 📅', reply_markup=reply.call_timer_kb)
-    elif msg == 'создать напоминание':
-        await message.answer(f'Отлично, {message.from_user.username}! '
-                             f'Когда планируем отдыхать? Давай создадим напоминание, что бы ничего не забыть! 📆', reply_markup=reply.call_vacation_kb)
+    elif msg == 'напоминания':
+        await message.answer(f'{message.from_user.username}, '
+                             f'давай создадим напоминание, что бы ничего не забыть! 📆', reply_markup=reply.tasks_kb)
     elif msg == 'собрать вещи':
         await message.answer('Давай приступим! 💼', reply_markup=reply.bags_kb)
     elif msg == 'документы':
